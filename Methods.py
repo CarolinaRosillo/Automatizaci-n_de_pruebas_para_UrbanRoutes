@@ -185,6 +185,10 @@ class UrbanRoutesMethods:
         self.set_card_details(card_number, card_code)
         self.simulate_clicking_on_screen()
 
+    # Método para obtener el texto en el campo de método de pago
+    def get_payment_field_text(self):
+        return self.driver.find_element(*self.locators.payment_field_added).text
+
     # Método para dejar un mensaje al conductor
     def set_message_for_driver(self):
         WebDriverWait(self.driver, 10).until(
@@ -232,5 +236,6 @@ class UrbanRoutesMethods:
         # Espera a que el temporizador haya llegado a 0
         WebDriverWait(self.driver, 40).until(
             expected_conditions.visibility_of_element_located(self.locators.ride_details))
+
         # Devuelve el texto de la ventana de los detalles del viaje
         return self.driver.find_element(*self.locators.ride_details).text

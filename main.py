@@ -59,23 +59,44 @@ class TestUrbanRoutes:
         UrbanRoutesMethods.retrieve_phone_code(driver=self.driver)
         self.urban_routes_methods.click_accept_code_number_button()
 
+        # Verifica si el campo de número de teléfono se ha llenado correctamente
+        phone_field = self.driver.find_element(*UrbanRoutesLocators.phone_field)
+        assert phone_field.text.strip() == data.phone_number
+
     def test_add_new_card(self):
         # Llama al método para añadir una nueva tarjeta
         self.urban_routes_methods.add_new_card(data.card_number, data.card_code)
         # Llama al método para guardar detalles de la tarjeta
         self.urban_routes_methods.click_added_card_button()
 
+        # Verifica si el campo "agregar método de pago" se ha llenado correctamente
+        payment_added = self.routes_page.get_payment_field_text()
+        expected_text_in_field = 'Tarjeta'
+        assert payment_added == expected_text_in_field
+
     def test_set_message_for_driver(self):
         # Llama al método para dejar un mensaje al conductor
         self.urban_routes_methods.set_message_for_driver()
+
+        # Verifica que el campo de mensaje para el conductor no esta vacío
+        message_field = self.driver.find_element(*UrbanRoutesLocators.message_driver_field)
+        assert message_field.get_attribute('value') != ""
 
     def test_request_blanket_and_tissues(self):
         # Llama al método para solicitar ítems (manta y pañuelos)
         self.urban_routes_methods.travel_request()
 
+        # Verifica que se haya seleccionado la opción de agregar manta y pañuelos
+        extra_request = self.driver.find_element(*UrbanRoutesLocators.request_blanket_and_tissues)
+        assert extra_request.is_enabled()
+
     def test_request_two_ice_creams(self):
         # Llama a la función para agregar ítems adicionales (2 helados)
         self.urban_routes_methods.request_two_ice_creams()
+
+        # Verifica que se hayan seleccionado 2 helados
+        ice_cream_order = self.driver.find_element(*UrbanRoutesLocators.ice_cream_added)
+        assert ice_cream_order.text == "2"
 
     def test_request_a_cab(self):
         # Espera a que aparezca el botón "Pedir un taxi"

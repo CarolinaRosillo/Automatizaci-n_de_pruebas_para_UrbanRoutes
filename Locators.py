@@ -21,6 +21,7 @@ class UrbanRoutesLocators:
 
     # Localizadores para los campos de tarjeta y método de pago
     payment_field = (By.CLASS_NAME, 'pp-text')
+    payment_field_added = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[2]/div[2]/div[2]/div[2]/div[1]')
     card_field = (By.CLASS_NAME, 'pp-plus')
     card_number_input = (By.CLASS_NAME, 'card-input')
     card_code_input = (By.CSS_SELECTOR, "input[name='code']")
@@ -34,6 +35,7 @@ class UrbanRoutesLocators:
     # Localizador para extras de viaje
     request_blanket_and_tissues = (By.XPATH, "//*[@id='root']/div/div[3]/div[3]/div[2]/div[2]/div[4]/div[2]/div[1]/div/div[2]/div/span")
     ice_cream_request = (By.XPATH, "//*[@id='root']/div/div[3]/div[3]/div[2]/div[2]/div[4]/div[2]/div[3]/div/div[2]/div[1]/div/div[2]/div/div[3]")
+    ice_cream_added = (By.XPATH, "//div[@class='counter-value' and text()='2']")
 
     # Localizadores para ordenar un taxi
     order_a_cab_button = (By.XPATH, '//*[@id="root"]/div/div[3]/div[4]/button')
